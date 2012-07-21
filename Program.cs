@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Web;
 
 namespace FsUaDownloader
 {
@@ -36,7 +37,7 @@ namespace FsUaDownloader
 				if (String.IsNullOrWhiteSpace(name))
 					continue;
 
-				availableLinks.Add(tempLine, name.Replace("+", " "));
+				availableLinks.Add(tempLine, HttpUtility.UrlDecode(name));
 			}
 
 			if (availableLinks.Count == 0)
