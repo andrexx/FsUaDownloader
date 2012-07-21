@@ -48,7 +48,8 @@ namespace FsUaDownloader
 
 			try
 			{
-				Console.WriteLine("Found " + availableLinks.Count + " files for downloading.");
+				Console.WriteLine("Found " + availableLinks.Count + " files for downloading:");
+				Console.WriteLine();
 
 				var wc = new WebClient();
 
@@ -58,7 +59,6 @@ namespace FsUaDownloader
 					// not use async for special reasons
 					wc.DownloadFile(link.Key, link.Value);
 					Console.WriteLine(" Completed!");
-					Console.WriteLine();
 				}
 			}
 			catch (Exception ex)
@@ -68,7 +68,10 @@ namespace FsUaDownloader
 				return;
 			}
 
+			Console.WriteLine();
+			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("All downloads completed... Press Enter for exit.");
+			Console.ResetColor();
 			Console.ReadLine();
 		}
 
