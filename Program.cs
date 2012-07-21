@@ -54,10 +54,10 @@ namespace FsUaDownloader
 
 				foreach (var link in availableLinks)
 				{
-					Console.WriteLine("Starting downloading: " + link.Value);
+					Console.Write("   Starting downloading: '" + link.Value + "'... ");
 					// not use async for special reasons
 					wc.DownloadFile(link.Key, link.Value);
-					Console.WriteLine("Completed downloading: " + link.Value);
+					Console.WriteLine(" Completed!");
 					Console.WriteLine();
 				}
 			}
