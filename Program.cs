@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Web;
@@ -23,6 +24,8 @@ namespace FsUaDownloader
 				return;
 			}
 
+		    string domain = ConfigurationManager.AppSettings["app:domain"];
+
 			Console.WriteLine("Load and parse links for download...");
 			var availableLinks = new Dictionary<string, string>();
 			var lines = File.ReadAllLines(filename);
@@ -31,13 +34,13 @@ namespace FsUaDownloader
 				var tempLine = line.Trim();
 				if (String.IsNullOrWhiteSpace(tempLine))
 					continue;
-				if (!tempLine.StartsWith("http://"))
+                if (!tempLine.StartsWith("/get/"))
 					continue;
 				var name = Path.GetFileName(tempLine);
 				if (String.IsNullOrWhiteSpace(name))
 					continue;
 
-				availableLinks.Add(tempLine, HttpUtility.UrlDecode(name));
+				availableLinks.Add(domain + tempLine, HttpUtility.UrlDecode(name));
 			}
 
 			if (availableLinks.Count == 0)
